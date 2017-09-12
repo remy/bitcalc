@@ -1,0 +1,56 @@
+<style>
+  *,
+  input {
+    font-family: monospace;
+    font-size: 1rem;
+  }
+
+  input {
+    font-weight: bold;
+    text-align: right;
+    outline: none;
+    width: 100px;
+  }
+
+  input[readonly] {
+    border-color: transparent;
+  }
+
+  li>* {
+    padding: 3px;
+  }
+
+  li {
+    color: #999;
+  }
+
+  li>* {
+    color: black;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  span.result:before {
+    content: ': '
+  }
+
+  span.result>.decimal {
+    color: #aaa;
+    padding-left: 10px;
+  }
+</style>
+<ol id="tape">
+  <li><input autofocus value="9" class="input"><span class="result"></span></li>
+</ol>
+
+<select id="byte-size">
+  <option value="8">8 bit</option>
+  <option value="16">16 bit</option>
+  <option value="32">32 bit</option>
+
+</select>
+
+<script src="app.js"></script>
