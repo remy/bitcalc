@@ -1,15 +1,19 @@
+<title>Bit calculator</title>
+<meta name="viewport" content="width=device-width">
 <style>
   *,
   input {
     font-family: monospace;
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   input {
     font-weight: bold;
     text-align: right;
     outline: none;
-    width: 100px;
+    min-width: 100px;
+    border: 1px solid #E0E0E0;
+    width: 30vw;
   }
 
   input[readonly] {
@@ -43,13 +47,19 @@
   }
 </style>
 <ol id="tape">
-  <li><input autofocus value="9" class="input"><span class="result"></span></li>
+  <li>
+    <input autofocus value="0xFF << 1" class="input">
+    <span class="result"></span>
+  </li>
 </ol>
 
 <select id="byte-size">
-  <option value="8">8 bit</option>
-  <option value="16">16 bit</option>
-  <option value="32">32 bit</option>
+  <option data-signed="0" value="8">8 bit (unsigned)</option>
+  <option data-signed="1" value="8">8 bit (signed)</option>
+  <option data-signed="0" value="16">16 bit (unsigned)</option>
+  <option data-signed="1" value="16">16 bit (signed)</option>
+  <option data-signed="0" value="32">32 bit (unsigned)</option>
+  <option data-signed="1" value="32">32 bit (signed)</option>
 
 </select>
 
