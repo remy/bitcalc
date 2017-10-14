@@ -1,0 +1,29 @@
+{
+  "name": "bitmath",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest tests/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/remy/bitcalc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/remy/bitcalc/issues"
+  },
+  "homepage": "https://github.com/remy/bitcalc#readme",
+  "dependencies": {
+    "tap": "^10.7.2"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1"
+  }
+}

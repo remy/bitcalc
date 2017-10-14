@@ -1,3 +1,4 @@
+/* global toBinary, toHex */
 const $$ = s => Array.from(document.querySelectorAll(s));
 const $ = s => document.querySelector(s);
 
@@ -11,46 +12,25 @@ let result = $('.result');
 let ptr = 0;
 let results = new DataView(new ArrayBuffer(1024));
 
-const asHex = n =>
-  n
-    .toString(16)
-    .padStart(byteSize / (8 / 2), '0')
-    .toUpperCase();
-
 byteSizeEl.onchange = () => {
   byteSize = parseInt(byteSizeEl.value, 10);
   signed = byteSizeEl.selectedOptions[0].dataset.signed === '1';
   run();
 };
 
-const toBinary = (n, size = 8) => {
-  if (n < 0) {
-    return Array.from({ length: size }, (_, i) => {
-      return ((n << i) & 2 ** (size-1)) === 2 ** (size-1) ? 1 : 0;
-    }).join('')
-  }
-  return n.toString(2).padStart(size, 0);
-};
-
-const toHex = (n, size = 8) => {
-  if (n < 0) {
-    n = parseInt(toBinary(n), 2);
-  }
-  return n.toString(16).padStart(size / (8 / 2), 0).toUpperCase();
-};
-
-
 function printValue(value) {
-  return toBinary(value, byteSize)
-      .split('')
-      .reduce((acc, curr, i) => {
-        if (i > 0 && i % 4 === 0) {
-          acc.push(' ');
-        }
-        acc.push(curr);
-        return acc;
-      }, [])
-      .join('') + `<span class="decimal">(${value} 0x${toHex(value)})</span>`;
+  return (
+    toBinary(value, byteSize)
+    .split('')
+    .reduce((acc, curr, i) => {
+      if (i > 0 && i % 4 === 0) {
+        acc.push(' ');
+      }
+      acc.push(curr);
+      return acc;
+    }, [])
+    .join('') + `<span class="decimal">(${value} 0x${toHex(value)})</span>`
+  );
 }
 
 const run = (e = { target: { nodeName: 'INPUT' } }) => {

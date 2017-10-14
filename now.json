@@ -1,0 +1,6 @@
+{
+  "name": "bitcalc",
+  "alias": "bitcalc.isthe.link",
+  "files": ["app.js", "index.html", "to.js"],
+  "type": "static"
+}
