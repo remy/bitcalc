@@ -29,7 +29,8 @@ function printValue(value) {
       acc.push(curr);
       return acc;
     }, [])
-    .join('') + `<span class="decimal">(${value} 0x${toHex(value)})</span>`
+    .join('') +
+    `<span class="decimal">(${value} 0x${toHex(value, byteSize)})</span>`
   );
 }
 
@@ -63,7 +64,7 @@ body.onkeydown = e => {
 
     ptr++;
     const li = document.createElement('li');
-    li.innerHTML += `<input autofocus value="${last}" class="input"><span class="result"></span>`;
+    li.innerHTML += `<input autofocus value="${last}" class="input"> <span class="result"></span>`;
     tape.appendChild(li);
     input = $$('input')[ptr];
     result = $$('.result')[ptr];
