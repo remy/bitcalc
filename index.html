@@ -60,8 +60,15 @@
   <option data-signed="1" value="16">16 bit (signed)</option>
   <option data-signed="0" value="32">32 bit (unsigned)</option>
   <option data-signed="1" value="32">32 bit (signed)</option>
-
+</select>
+<select id="endian">
+  <option value="big">big endian</option>
+  <option value="little">little endian</option>
 </select>
 
 <script src="to.js"></script>
 <script src="app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}</script>
