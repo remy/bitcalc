@@ -45,6 +45,13 @@
     color: #aaa;
     padding-left: 10px;
   }
+
+  button {
+    border-radius: 5px;
+    padding: 2px 10px;
+    height: 28px;
+    cursor: pointer;
+  }
 </style>
 <ol id="tape">
   <li>
@@ -52,6 +59,13 @@
     <span class="result"></span>
   </li>
 </ol>
+
+<script id="template" type="template">
+<li>
+  <input autofocus value="0xFF << 1" class="input">
+  <span class="result"></span>
+</li>
+</script>
 
 <select id="byte-size">
   <option data-signed="0" value="8">8 bit (unsigned)</option>
@@ -65,10 +79,11 @@
   <option value="big">big endian</option>
   <option value="little">little endian</option>
 </select>
+<button id="reset">reset</button>
 
 <script src="to.js"></script>
 <script src="app.js"></script>
 <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
-}</script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }</script>

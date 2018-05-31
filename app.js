@@ -11,6 +11,7 @@ let signed = false;
 let input = $('input');
 let result = $('.result');
 
+let ready = false;
 let ptr = 0;
 let results = new DataView(new ArrayBuffer(1024));
 
@@ -44,6 +45,10 @@ function printValue(value) {
 }
 
 const run = (e = { target: { nodeName: 'INPUT' } }) => {
+  if (!ready) {
+    return;
+  }
+
   if (e.target.nodeName !== 'INPUT') {
     return;
   }
@@ -51,38 +56,79 @@ const run = (e = { target: { nodeName: 'INPUT' } }) => {
   const intType = signed ? 'Int' : 'Uint';
 
   try {
-    results[`set${intType}${byteSize}`](ptr, eval(input.value), !bigEndian);
+    let res = eval(input.value);
+    if (typeof res === 'string') {
+      res = res.charCodeAt(0);
+    }
+    results[`set${intType}${byteSize}`](ptr, res, !bigEndian);
   } catch (e) {
     console.error(e);
   }
 
   const value = results[`get${intType}${byteSize}`](ptr);
-  console.log('%s: %s', `get${intType}${byteSize}`, value, intType, byteSize);
 
   result.innerHTML = printValue(value);
+
+  const history = $$('input').map(v => v.value);
+  const query = new URLSearchParams();
+  query.append('history', JSON.stringify(history));
+  query.append('endian', endianEl.value);
+  query.append('byte-size', byteSize);
+  window.history.replaceState(null, '', '?' + query.toString());
 };
+
+function addLine() {
+  const intType = signed ? 'Int' : 'Uint';
+  const last = results[`get${intType}${byteSize}`](ptr);
+
+  input.setAttribute('readonly', 'readonly');
+
+  ptr++;
+  const li = document.createElement('li');
+  li.innerHTML += `<input autofocus value="${last}" class="input"> <span class="result"></span>`;
+  tape.appendChild(li);
+  input = $$('input')[ptr];
+  result = $$('.result')[ptr];
+  input.focus();
+
+  input.selectionStart = input.selectionEnd = input.value.length;
+
+  results[`set${intType}${byteSize}`](ptr, last);
+  run();
+}
+
+function init() {
+  ptr = 0;
+  results = new DataView(new ArrayBuffer(1024));
+
+  $(
+    '#tape'
+  ).innerHTML = `<li><input autofocus value="" class="input"> <span class="result"></span></li>`;
+
+  result = $('.result');
+
+  const query = new URLSearchParams(window.location.search.slice(1));
+  const history = JSON.parse(query.get('history'));
+  byteSizeEl.value = query.get('byte-size');
+  endianEl.value = query.get('endian');
+
+  history.forEach((value, i) => {
+    input = $$('input').pop();
+    input.value = value;
+    run();
+    if (i < history.length - 1) addLine();
+  });
+
+  if (history.length) {
+    run();
+  }
+}
 
 const body = document.body;
 body.oninput = run;
 body.onkeydown = e => {
   if (e.which === 13 && e.target.nodeName === 'INPUT') {
-    const intType = signed ? 'Int' : 'Uint';
-    const last = results[`get${intType}${byteSize}`](ptr);
-
-    input.setAttribute('readonly', 'readonly');
-
-    ptr++;
-    const li = document.createElement('li');
-    li.innerHTML += `<input autofocus value="${last}" class="input"> <span class="result"></span>`;
-    tape.appendChild(li);
-    input = $$('input')[ptr];
-    result = $$('.result')[ptr];
-    input.focus();
-
-    input.selectionStart = input.selectionEnd = input.value.length;
-
-    results[`set${intType}${byteSize}`](ptr, last);
-    run();
+    addLine();
   }
 };
 
@@ -96,5 +142,17 @@ if (localStorage.endian) {
   endianEl.onchange();
 }
 
-run();
+$('#reset').onclick = () => {
+  window.location = '/';
+};
+
+window.onpopstate = init;
+
+ready = true;
+if (window.location.search) {
+  init();
+} else {
+  run();
+}
+
 input.selectionStart = input.selectionEnd = input.value.length;
