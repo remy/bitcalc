@@ -1,89 +1,52 @@
-<title>Bit calculator</title>
-<meta name="viewport" content="width=device-width">
-<style>
-  *,
-  input {
-    font-family: monospace;
-    font-size: 1.2rem;
-  }
+<!DOCTYPE html>
+<html lang="en">
 
-  input {
-    font-weight: bold;
-    text-align: right;
-    outline: none;
-    min-width: 100px;
-    border: 1px solid #E0E0E0;
-    width: 30vw;
-  }
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bit calculator</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="./index.css">
 
-  input[readonly] {
-    border-color: transparent;
-  }
+  </head>
 
-  li>* {
-    padding: 3px;
-  }
+  <body>
 
-  li {
-    color: #999;
-  }
+    <ol id="tape">
+      <li>
+        <input autofocus value="0xFF << 1" class="input">
+        <span class="result"></span>
+      </li>
+    </ol>
 
-  li>* {
-    color: black;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  span.result:before {
-    content: ': '
-  }
-
-  span.result>.decimal {
-    color: #aaa;
-    padding-left: 10px;
-  }
-
-  button {
-    border-radius: 5px;
-    padding: 2px 10px;
-    height: 28px;
-    cursor: pointer;
-  }
-</style>
-<ol id="tape">
-  <li>
-    <input autofocus value="0xFF << 1" class="input">
-    <span class="result"></span>
-  </li>
-</ol>
-
-<script id="template" type="template">
+    <script id="template" type="template">
 <li>
   <input autofocus value="0xFF << 1" class="input">
   <span class="result"></span>
 </li>
 </script>
 
-<select id="byte-size">
-  <option data-signed="0" value="8">8 bit (unsigned)</option>
-  <option data-signed="1" value="8">8 bit (signed)</option>
-  <option data-signed="0" value="16">16 bit (unsigned)</option>
-  <option data-signed="1" value="16">16 bit (signed)</option>
-  <option data-signed="0" value="32">32 bit (unsigned)</option>
-  <option data-signed="1" value="32">32 bit (signed)</option>
-</select>
-<select id="endian">
-  <option value="big">big endian</option>
-  <option value="little">little endian</option>
-</select>
-<button id="reset">reset</button>
+    <select id="byte-size">
+      <option data-signed="0" value="8">8 bit (unsigned)</option>
+      <option data-signed="1" value="8">8 bit (signed)</option>
+      <option data-signed="0" value="16">16 bit (unsigned)</option>
+      <option data-signed="1" value="16">16 bit (signed)</option>
+      <option data-signed="0" value="32">32 bit (unsigned)</option>
+      <option data-signed="1" value="32">32 bit (signed)</option>
+      <option data-signed="1" float="1" value="32">32 bit float</option>
+    </select>
+    <select id="endian">
+      <option value="big">big endian</option>
+      <option value="little">little endian</option>
+    </select>
+    <button id="reset">reset</button>
 
-<script src="to.js"></script>
-<script src="app.js"></script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
-  }</script>
+    <script src="to.js"></script>
+    <script src="app.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        // navigator.serviceWorker.register('/sw.js');
+      }</script>
+  </body>
+
+</html>

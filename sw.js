@@ -1,6 +1,6 @@
 // we'll version our cache (and learn how to delete caches in
 // some other post)
-const cacheName = 'v4::static';
+const cacheName = 'v6::static';
 
 self.addEventListener('install', e => {
   // once the SW is installed, go ahead and fetch the resources
@@ -8,7 +8,7 @@ self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(cacheName).then(cache => {
       return cache
-        .addAll(['/', '/to.js', '/app.js'])
+        .addAll(['/', '/to.js', '/app.js', '/index.css'])
         .then(() => self.skipWaiting());
     })
   );

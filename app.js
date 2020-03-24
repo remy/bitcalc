@@ -8,6 +8,7 @@ const endianEl = $('#endian');
 let bigEndian = true;
 let byteSize = byteSizeEl.value;
 let signed = false;
+let float = false;
 let input = $('input');
 let result = $('.result');
 
@@ -25,6 +26,7 @@ byteSizeEl.onchange = () => {
   localStorage.byteSize = byteSizeEl.value;
   byteSize = parseInt(byteSizeEl.value, 10);
   signed = byteSizeEl.selectedOptions[0].dataset.signed === '1';
+  float = byteSizeEl.selectedOptions[0].dataset.float === '1';
   run();
 };
 
@@ -53,19 +55,19 @@ const run = (e = { target: { nodeName: 'INPUT' } }) => {
     return;
   }
 
-  const intType = signed ? 'Int' : 'Uint';
+  const type = float ? 'Float' : signed ? 'Int' : 'Uint';
 
   try {
     let res = eval(input.value);
     if (typeof res === 'string') {
       res = res.charCodeAt(0);
     }
-    results[`set${intType}${byteSize}`](ptr, res, !bigEndian);
+    results[`set${type}${byteSize}`](ptr, res, !bigEndian);
   } catch (e) {
     console.error(e);
   }
 
-  const value = results[`get${intType}${byteSize}`](ptr);
+  const value = results[`get${type}${byteSize}`](ptr);
 
   result.innerHTML = printValue(value);
 
@@ -78,8 +80,8 @@ const run = (e = { target: { nodeName: 'INPUT' } }) => {
 };
 
 function addLine() {
-  const intType = signed ? 'Int' : 'Uint';
-  const last = results[`get${intType}${byteSize}`](ptr);
+  const type = float ? 'Float' : signed ? 'Int' : 'Uint';
+  const last = results[`get${type}${byteSize}`](ptr);
 
   input.setAttribute('readonly', 'readonly');
 
@@ -93,7 +95,7 @@ function addLine() {
 
   input.selectionStart = input.selectionEnd = input.value.length;
 
-  results[`set${intType}${byteSize}`](ptr, last);
+  results[`set${type}${byteSize}`](ptr, last);
   run();
 }
 
