@@ -1,6 +1,6 @@
 html {
   --c-input-bg: #fff;
-  --c-bg: #fdfdfd;
+  --c-bg: #f9f9f9;
   --c-bg-alt: #1a1a1a;
   --c-text: #212121;
   --c-cta: #1565c0;
@@ -96,9 +96,10 @@ button {
   border-radius: 2px;
 }
 
-select, button {
+select,
+button {
   border: 1px solid var(--c-input-border);
-  background: rgba(1,1,1,0.1);
+  background: rgba(1, 1, 1, 0.1);
 }
 
 input {
