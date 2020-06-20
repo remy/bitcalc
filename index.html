@@ -7,7 +7,7 @@
     <title>Bit calculator</title>
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="./index.css">
-
+    <link rel="manifest" href="/manifest.webmanifest">
   </head>
 
   <body>
@@ -49,7 +49,7 @@
     <script src="app.js"></script>
     <script>
       if ('serviceWorker' in navigator) {
-        // navigator.serviceWorker.register('/sw.js');
+        navigator.serviceWorker.register('/sw.js');
       }</script>
   </body>
 

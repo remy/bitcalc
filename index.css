@@ -185,7 +185,7 @@ footer p {
   }
 
   #endian {
-    width: 5ch;
+    width: 6ch;
   }
 
   .button-group {
@@ -198,6 +198,10 @@ footer p {
   .binary {
     white-space: nowrap;
     overflow: scroll;
+  }
+
+  .binary {
+    flex-grow: 1;
   }
 
   .result {
