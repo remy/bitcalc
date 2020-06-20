@@ -1,6 +1,6 @@
 /* global toBinary, toHex */
-const $$ = s => Array.from(document.querySelectorAll(s));
-const $ = s => document.querySelector(s);
+const $$ = (s) => Array.from(document.querySelectorAll(s));
+const $ = (s) => document.querySelector(s);
 
 const tape = $('#tape');
 const byteSizeEl = $('#byte-size');
@@ -32,6 +32,7 @@ byteSizeEl.onchange = () => {
 
 function printValue(value) {
   return (
+    '<span class="binary">' +
     toBinary(value, byteSize)
       .split('')
       .reduce((acc, curr, i) => {
@@ -42,7 +43,7 @@ function printValue(value) {
         return acc;
       }, [])
       .join('') +
-    `<span class="decimal">(${value} 0x${toHex(value, byteSize)})</span>`
+    `</span><span class="decimal">(${value} 0x${toHex(value, byteSize)})</span>`
   );
 }
 
@@ -71,7 +72,7 @@ const run = (e = { target: { nodeName: 'INPUT' } }) => {
 
   result.innerHTML = printValue(value);
 
-  const history = $$('input').map(v => v.value);
+  const history = $$('input').map((v) => v.value);
   const query = new URLSearchParams();
   query.append('history', JSON.stringify(history));
   query.append('endian', endianEl.value);
@@ -128,7 +129,7 @@ function init() {
 
 const body = document.body;
 body.oninput = run;
-body.onkeydown = e => {
+body.onkeydown = (e) => {
   if (e.which === 13 && e.target.nodeName === 'INPUT') {
     addLine();
   }

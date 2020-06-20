@@ -34,8 +34,21 @@ html {
   }
 }
 
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 20px;
+}
+
+main {
+  flex: 1;
+}
+
 *,
 input {
+  box-sizing: border-box;
   font-family: monospace;
   font-size: 1.2rem;
 }
@@ -118,4 +131,78 @@ li > * {
 
 input:focus {
   color: var(--c-input-fg);
+}
+
+footer {
+  padding-top: 20px;
+}
+
+footer * {
+  font-size: 0.8rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+@media (max-width: 500px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  #tape {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #tape li:last-child {
+    background: var(--c-input-bg);
+    outline: 1px solid var(--c-input-border);
+    margin-top: 12px;
+  }
+
+  #tape input[readonly] {
+    background: var(--c-bg);
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .result {
+    width: 100%;
+    text-align: right;
+    padding: 8px 4px;
+  }
+
+  span.result:before {
+    display: none;
+  }
+
+  #endian {
+    width: 5ch;
+  }
+
+  .button-group {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .decimal,
+  .binary {
+    white-space: nowrap;
+    overflow: scroll;
+  }
+
+  .result {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+  }
 }

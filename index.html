@@ -11,36 +11,40 @@
   </head>
 
   <body>
+    <main>
+      <ol id="tape">
+        <li>
+          <input autofocus value="0xFF << 1" class="input">
+          <span class="result"></span>
+        </li>
+      </ol>
 
-    <ol id="tape">
-      <li>
-        <input autofocus value="0xFF << 1" class="input">
-        <span class="result"></span>
-      </li>
-    </ol>
-
-    <script id="template" type="template">
+      <script id="template" type="template">
 <li>
   <input autofocus value="0xFF << 1" class="input">
   <span class="result"></span>
 </li>
 </script>
-
-    <select id="byte-size">
-      <option data-signed="0" value="8">8 bit (unsigned)</option>
-      <option data-signed="1" value="8">8 bit (signed)</option>
-      <option data-signed="0" value="16">16 bit (unsigned)</option>
-      <option data-signed="1" value="16">16 bit (signed)</option>
-      <option data-signed="0" value="32">32 bit (unsigned)</option>
-      <option data-signed="1" value="32">32 bit (signed)</option>
-      <option data-signed="1" float="1" value="32">32 bit float</option>
-    </select>
-    <select id="endian">
-      <option value="big">big endian</option>
-      <option value="little">little endian</option>
-    </select>
-    <button id="reset">reset</button>
-
+      <div class="button-group">
+        <select id="byte-size">
+          <option data-signed="0" value="8">u8int</option>
+          <option data-signed="1" value="8">8int</option>
+          <option data-signed="0" value="16">u16int</option>
+          <option data-signed="1" value="16">16int</option>
+          <option data-signed="0" value="32">u32int</option>
+          <option data-signed="1" value="32">32int</option>
+          <option data-signed="1" float="1" value="32">float32</option>
+        </select>
+        <select id="endian">
+          <option value="big">big endian</option>
+          <option value="little">little endian</option>
+        </select>
+        <button id="reset">reset</button>
+      </div>
+    </main>
+    <footer>
+      <p>Created by <a href="https://remysharp.com">Remy Sharp</a></p>
+    </footer>
     <script src="to.js"></script>
     <script src="app.js"></script>
     <script>
