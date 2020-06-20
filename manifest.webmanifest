@@ -3,9 +3,16 @@
   "name": "bitcalc",
   "icons": [
     {
-      "src": "favicon-512.png",
-      "sizes": "512x512 64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "bitcalc.png",
+      "sizes": "512x512",
+      "type": "image/x-icon",
+      "purpose": "maskable"
+    },
+    {
+      "src": "bitcalc@144.png",
+      "sizes": "144x144",
+      "type": "image/x-icon",
+      "purpose": "maskable"
     }
   ],
   "start_url": "/",
