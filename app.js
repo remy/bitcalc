@@ -159,3 +159,10 @@ if (window.location.search) {
 }
 
 input.selectionStart = input.selectionEnd = input.value.length;
+
+document.body.onclick = document.body.ontouchstart = (e) => {
+  try {
+    if (e.target.closest('#tape')) return;
+    input.focus();
+  } catch (E) {}
+};
