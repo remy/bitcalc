@@ -163,6 +163,7 @@ input.selectionStart = input.selectionEnd = input.value.length;
 document.body.onclick = document.body.ontouchstart = (e) => {
   try {
     if (e.target.closest('#tape')) return;
+    if (e.target.closest('.button-group')) return;
     input.focus();
   } catch (E) {}
 };
