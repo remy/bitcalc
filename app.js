@@ -32,12 +32,12 @@ byteSizeEl.onchange = () => {
 
 function printValue(value) {
   return (
-    '<span class="binary">' +
+    `<span data-size="${byteSize}" class="binary">` +
     toBinary(value, byteSize)
       .split('')
       .reduce((acc, curr, i) => {
         if (i > 0 && i % 4 === 0) {
-          acc.push(' ');
+          acc.push('<i> </i>');
         }
         acc.push(curr);
         return acc;

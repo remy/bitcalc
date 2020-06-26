@@ -145,9 +145,17 @@ footer p {
   margin: 0;
 }
 
+a {
+  color: var(--c-cta);
+}
+
 @media (max-width: 500px) {
   * {
     box-sizing: border-box;
+  }
+
+  .binary[data-size='32'] i:nth-child(4n) {
+    display: block;
   }
 
   #tape {
@@ -198,10 +206,11 @@ footer p {
   .binary {
     white-space: nowrap;
     overflow: scroll;
+    flex-grow: 1;
   }
 
   .binary {
-    flex-grow: 1;
+    flex-grow: 10;
   }
 
   .result {
