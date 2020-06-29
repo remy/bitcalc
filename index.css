@@ -142,7 +142,11 @@ footer * {
 }
 
 footer p {
-  margin: 0;
+  margin: 16px 0;
+}
+
+footer p:last-child {
+  margin-bottom: 0;
 }
 
 a {
